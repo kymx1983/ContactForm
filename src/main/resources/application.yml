@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/contact_form?useSSL=false&useUnicode=true&characterEncoding=utf8
+    username: root
+    password: passexcel
