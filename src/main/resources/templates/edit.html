@@ -52,7 +52,8 @@
                 <div class="form-group">
                     <label for="user_address">ご住所:</label>
                     <input type="text" name="userAddress" class="form-control" th:value="${contact.userAddress}">
-                    <div th:if="${#fields.hasErrors('userAddress')}" th:errors="*{userAddress}" th:errorclass="err"></div>
+                    <div th:if="${#fields.hasErrors('userAddress')}" th:errors="*{userAddress}"
+                         th:errorclass="err"></div>
                 </div>
                 <div class="form-group">
                     <label for="tell">電話番号:</label>
@@ -62,7 +63,8 @@
                 <div class="form-group">
                     <label for="mail_address">メールアドレス:</label>
                     <input type="text" name="mailAddress" class="form-control" th:value="${contact.mailAddress}">
-                    <div th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}" th:errorclass="err"></div>
+                    <div th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}"
+                         th:errorclass="err"></div>
                 </div>
 
                 <input type="submit" class="btn btn-dark" value="確定">　
