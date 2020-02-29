@@ -40,7 +40,7 @@ public class Contact {
     @Column(name="status")
     private String status;
 
-    @Column(name="create_at")
+    @Column(name="create_at", nullable = true)
     private Timestamp createdAt;
 
     public long getId() {

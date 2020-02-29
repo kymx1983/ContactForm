@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -37,14 +38,19 @@ public class IndexController {
 
         if(result.hasErrors()) {
             System.out.println("エラーが出ていますよ！！");
+            for(FieldError err: result.getFieldErrors()) {
+                System.out.println(err.getDefaultMessage());
+            }
             ModelAndView model = new ModelAndView();
             model.setViewName("edit");
             model.addObject("contact", contact);
             return model;
         } else {
             System.out.println("正常ですよ");
-            System.out.println("id:" + contact.getId());
-            contact.setStatus("未着手");
+            if( contact.getId() == 0){
+                // 新規作成の場合、ステータスを初期設定する
+                contact.setStatus("未着手");
+            }
             contact.setCreatedAt(new Timestamp(System.currentTimeMillis()));
             repository.saveAndFlush(contact);
             return new ModelAndView("redirect:/");

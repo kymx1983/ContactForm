@@ -31,8 +31,8 @@
             <br>
             <h3>お問い合わせ内容を記載してください。</h3>
             <form method="post" action="/" th:object="${contact}">
-
                 <input type="hidden" name="id" th:value="${contact.id}">
+                <input type="hidden" name="status" th:value="${contact.status}">
 
                 <div class="form-group">
                     <label for="title">タイトル:</label>
@@ -42,22 +42,27 @@
                 <div class="form-group">
                     <label for="content">内容:</label>
                     <textarea class="form-control" name="content" rows="3" th:field="${contact.content}"></textarea>
+                    <div th:if="${#fields.hasErrors('content')}" th:errors="*{content}" th:errorclass="err"></div>
                 </div>
                 <div class="form-group">
                     <label for="user_name">お名前:</label>
                     <input type="text" name="userName" class="form-control" th:value="${contact.userName}">
+                    <div th:if="${#fields.hasErrors('content')}" th:errors="*{content}" th:errorclass="err"></div>
                 </div>
                 <div class="form-group">
                     <label for="user_address">ご住所:</label>
                     <input type="text" name="userAddress" class="form-control" th:value="${contact.userAddress}">
+                    <div th:if="${#fields.hasErrors('userAddress')}" th:errors="*{userAddress}" th:errorclass="err"></div>
                 </div>
                 <div class="form-group">
                     <label for="tell">電話番号:</label>
                     <input type="text" name="tel" class="form-control" th:value="${contact.tel}">
+                    <div th:if="${#fields.hasErrors('tel')}" th:errors="*{tel}" th:errorclass="err"></div>
                 </div>
                 <div class="form-group">
                     <label for="mail_address">メールアドレス:</label>
                     <input type="text" name="mailAddress" class="form-control" th:value="${contact.mailAddress}">
+                    <div th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}" th:errorclass="err"></div>
                 </div>
 
                 <input type="submit" class="btn btn-dark" value="確定">　
