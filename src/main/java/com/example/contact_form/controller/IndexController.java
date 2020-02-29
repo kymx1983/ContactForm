@@ -5,6 +5,8 @@ import com.example.contact_form.repository.ContactRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -31,22 +33,32 @@ public class IndexController {
 
     @RequestMapping(value="/", method=RequestMethod.POST)
     @Transactional(readOnly=false)
-    public ModelAndView create(@ModelAttribute("contact") Contact contact){
-        contact.setStatus("未着手");
-        contact.setCreatedAt(new Timestamp(System.currentTimeMillis()));
-        repository.saveAndFlush(contact);
-        return new ModelAndView("redirect:/");
+    public ModelAndView create(@ModelAttribute("contact") @Validated Contact contact, BindingResult result){
+
+        if(result.hasErrors()) {
+            System.out.println("エラーが出ていますよ！！");
+            ModelAndView model = new ModelAndView();
+            model.setViewName("edit");
+            model.addObject("contact", contact);
+            return model;
+        } else {
+            System.out.println("正常ですよ");
+            System.out.println("id:" + contact.getId());
+            contact.setStatus("未着手");
+            contact.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+            repository.saveAndFlush(contact);
+            return new ModelAndView("redirect:/");
+        }
     }
 
     @RequestMapping("/new")
-    public ModelAndView list(){
+    public ModelAndView newContact(){
         ModelAndView model = new ModelAndView();
         model.setViewName("edit");
-
         model.addObject("contact", new Contact());
-
         return model;
     }
+
 
 
     @RequestMapping("/edit")

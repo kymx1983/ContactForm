@@ -30,11 +30,14 @@
         <div class="col-6  ml-100 border border-dark">
             <br>
             <h3>お問い合わせ内容を記載してください。</h3>
-            <form method="post" action="/">
+            <form method="post" action="/" th:object="${contact}">
+
+                <input type="hidden" name="id" th:value="${contact.id}">
 
                 <div class="form-group">
                     <label for="title">タイトル:</label>
                     <input type="text" name="title" class="form-control" th:value="${contact.title}">
+                    <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" th:errorclass="err"></div>
                 </div>
                 <div class="form-group">
                     <label for="content">内容:</label>

@@ -1,6 +1,9 @@
 package com.example.contact_form.model;
 
+import com.sun.istack.Nullable;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.sql.Timestamp;
 
 @Entity
@@ -13,12 +16,15 @@ public class Contact {
     private long id;
 
     @Column(name="title")
+    @NotEmpty(message = "タイトルを入力してください。")
     private String title;
 
     @Column(name="content")
+    @NotEmpty(message = "内容を入力してください")
     private String content;
 
     @Column(name="us_name")
+    @NotEmpty(message="名前を入力してください")
     private String userName;
 
     @Column(name="us_address")
@@ -28,6 +34,7 @@ public class Contact {
     private String tel;
 
     @Column(name="mail_address")
+    @NotEmpty(message="メールアドレスを入力してください")
     private String mailAddress;
 
     @Column(name="status")
