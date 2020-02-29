@@ -42,7 +42,7 @@ public class IndexController {
 
     /**
      * 更新画面を表示する（登録時）
-     * @return
+     * @return model
      */
     @RequestMapping("/new")
     public ModelAndView edit() {
