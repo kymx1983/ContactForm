@@ -30,7 +30,7 @@
         <div class="col-6  ml-100 border border-dark">
             <br>
             <h3>お問い合わせ内容を記載してください。</h3>
-            <form method="post" action="/" th:object="${contact}">
+            <form method="post" action="/create" th:object="${contact}">
                 <input type="hidden" name="id" th:value="${contact.id}">
                 <input type="hidden" name="status" th:value="${contact.status}">
 
